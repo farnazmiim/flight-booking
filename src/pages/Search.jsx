@@ -39,17 +39,17 @@ export default function Search() {
           Multi-city
         </label>
       </div>
-      <div class="col-span-6">
+      <div class="col-span-12">
         <label for="text" class="block mb-1 form__label">
           Origin
         </label>
-        <input type="text" class="form__input" />
+        <input type="text" class="form__input" placeholder="Origin" />
       </div>
-      <div class="col-span-6">
+      <div class="col-span-12">
         <label for="text" class="block mb-1 form__label">
           Destination
         </label>
-        <input type="text" class="form__input" />
+        <input type="text" class="form__input" placeholder="Destination" />
       </div>
       <div class="col-span-6">
         <label for="date" class="block mb-1 form__label">

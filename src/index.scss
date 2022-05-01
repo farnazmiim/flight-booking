@@ -28,4 +28,22 @@ body {
   .page__layout--12 {
     @apply grid grid-cols-12 gap-4 p-4 bg-white;
   }
+  .header__layout {
+    @apply p-4 bg-slate-900 dark:text-white;
+  }
+  .footer__layout {
+    @apply p-4 bg-slate-900 dark:text-white;
+  }
 }
+
+// #1c1f4c
+
+// #00848c
+
+// #037272
+
+// #fccf17
+
+// #fec20f
+
+// #edebd9

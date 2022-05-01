@@ -1,15 +1,13 @@
-import { useState } from "react";
-import "./App.css";
-import Search from "./Search";
+import { Outlet } from "react-router";
 
 function App() {
   return (
     <div className="min-h-screen flex flex-col ">
-      {/* <header className="">Header</header> */}
+      <header className="header__layout">Page title</header>
       <main className="flex-1">
-        <Search></Search>
+        <Outlet />
       </main>
-      {/* <footer className="">Footer</footer> */}
+      <footer className="footer__layout">Footer</footer>
     </div>
   );
 }

@@ -2,20 +2,18 @@ import React from "react";
 
 export default function Search() {
   return (
-    <div class="grid grid-cols-12 gap-4 m-4">
+    <div class="page__layout--12 search-page">
       <div className="col-span-12">
-        <legend className="text-base font-medium text-gray-900">
-          Journey type
-        </legend>
+        <legend className="page__title--base">Journey type</legend>
       </div>
       <div class="col-span-4">
         <input
           id="one-way"
           name="journey-type"
           type="radio"
-          className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+          className="form__radio--focus"
         />
-        <label htmlFor="one-way" className="radio">
+        <label htmlFor="one-way" className="form__radio">
           One way
         </label>
       </div>
@@ -24,9 +22,9 @@ export default function Search() {
           id="return"
           name="journey-type"
           type="radio"
-          className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+          className="form__radio--focus"
         />
-        <label htmlFor="return" className="radio">
+        <label htmlFor="return" className="form__radio">
           Return
         </label>
       </div>
@@ -35,56 +33,41 @@ export default function Search() {
           id="multi-city"
           name="journey-type"
           type="radio"
-          className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+          className="form__radio--focus"
         />
-        <label htmlFor="multi-city" className="radio">
+        <label htmlFor="multi-city" className="form__radio">
           Multi-city
         </label>
       </div>
       <div class="col-span-6">
-        <label for="email" class="block mb-1 text-gray-600 font-semibold">
+        <label for="text" class="block mb-1 form__label">
           Origin
         </label>
-        <input
-          type="text"
-          class="bg-indigo-50 px-4 py-2 outline-none rounded-md w-full"
-        />
+        <input type="text" class="form__input" />
       </div>
       <div class="col-span-6">
-        <label for="email" class="block mb-1 text-gray-600 font-semibold">
+        <label for="text" class="block mb-1 form__label">
           Destination
         </label>
-        <input
-          type="text"
-          class="bg-indigo-50 px-4 py-2 outline-none rounded-md w-full"
-        />
+        <input type="text" class="form__input" />
       </div>
       <div class="col-span-6">
-        <label for="email" class="block mb-1 text-gray-600 font-semibold">
+        <label for="date" class="block mb-1 form__label">
           Departure date
         </label>
-        <input
-          type="date"
-          class="bg-indigo-50 px-4 py-2 outline-none rounded-md w-full"
-        />
+        <input type="date" class="form__input" />
       </div>
       <div class="col-span-6">
-        <label for="email" class="block mb-1 text-gray-600 font-semibold">
+        <label for="date" class="block mb-1 form__label">
           Return date
         </label>
-        <input
-          type="date"
-          class="bg-indigo-50 px-4 py-2 outline-none rounded-md w-full"
-        />
+        <input type="date" class="form__input" />
       </div>
       <div class="col-span-6">
-        <label for="email" class="block mb-1 text-gray-600 font-semibold">
+        <label for="text" class="block mb-1 form__label">
           Passengers
         </label>
-        <select
-          class="bg-indigo-50 px-4 py-2 outline-none rounded-md w-full"
-          aria-label="Default select example"
-        >
+        <select class="form__input">
           <option selected value="1">
             One
           </option>
@@ -93,13 +76,10 @@ export default function Search() {
         </select>
       </div>
       <div class="col-span-6">
-        <label for="email" class="block mb-1 text-gray-600 font-semibold">
+        <label for="text" class="block mb-1 form__label">
           Class
         </label>
-        <select
-          class="bg-indigo-50 px-4 py-2 outline-none rounded-md w-full"
-          aria-label="Default select example"
-        >
+        <select class="form__input">
           <option selected value="1">
             Economy
           </option>
@@ -109,7 +89,7 @@ export default function Search() {
           <option value="5">Any</option>
         </select>
       </div>
-      <div class="col-span-12 py-2 px-4 border text-center border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mt-4">
+      <div class="col-span-12 form__btn--active">
         <button type="submit" className="">
           Find available flights
         </button>

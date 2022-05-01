@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  background-color: #f3f3f3;
+}
+
 @layer components {
   .form__radio {
     @apply ml-3 text-sm font-medium text-gray-700;
@@ -24,8 +28,4 @@
   .page__layout--12 {
     @apply grid grid-cols-12 gap-4 p-4 bg-white;
   }
-}
-
-body {
-  background-color: #f3f3f3;
 }

@@ -1,6 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "../api/axios";
 
 export default function Search() {
+  // const [isLoading, setLoading] = useState(false);
+  // const [isError, setError] = useState(false);
+  const [data, setData] = useState([]);
+  console.log(data);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.getData();
+
+        setData(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <div class="page__layout--12 search-page">
       <div className="col-span-12">

@@ -6,7 +6,11 @@ export default defineConfig({
   plugins: [react()],
   server :{
     proxy : {
-      '/offers/off_0000AJ2dvR4LuVMIf5iYk7' : 'https://api.duffel.com/air/'
+      '/api' : {
+        target : 'https://api.duffel.com/air/',
+        changeOrigin : true,
+        rewrite : path => path.replace('/api', '')
+      }
     }
   }
 })

@@ -95,20 +95,7 @@ export default function SearchWrapper() {
       ? oneWayData
       : multiData;
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError(false);
-    setLoading(true);
-    try {
-      createSearchFlight();
-      const response = await axios.createSearchFlight(newData);
-
-      setData(response.data);
-    } catch (error) {
-      setError(true);
-    }
-    setLoading(false);
-  };
+  // const handleSubmit = async (e) => {};
   const { mutate: createSearchFlight } = useMutation(newData);
 
   console.log(data);
@@ -121,7 +108,7 @@ export default function SearchWrapper() {
   };
 
   return (
-    <div class="page__layout--12 search-page">
+    <div class="search-page">
       {isError && <div>Something went wrong ...</div>}
 
       {isLoading ? (
@@ -129,7 +116,7 @@ export default function SearchWrapper() {
       ) : (
         <Search
           handleChange={handleChange}
-          handleSubmit={handleSubmit}
+          createSearchFlight={createSearchFlight}
         ></Search>
       )}
     </div>

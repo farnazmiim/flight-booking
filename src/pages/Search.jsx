@@ -1,8 +1,25 @@
+import { useForm } from "react-hook-form";
 import PassengersBtn from "../components/PassengersBtn";
 
-export default function Search({ handleSubmit, handleChange }) {
+export default function Search({ createSearchFlight, handleChange }) {
+  const { register, handleSubmit } = useForm();
+  const onSubmit = async (data) => {
+    console.log(data);
+    e.preventDefault();
+    setError(false);
+    setLoading(true);
+    try {
+      createSearchFlight();
+      const response = await axios.createSearchFlight(newData);
+
+      setData(response.JSON.stringify(data));
+    } catch (error) {
+      setError(true);
+    }
+    setLoading(false);
+  };
   return (
-    <>
+    <form className="page__layout--12 " onSubmit={handleSubmit(onSubmit)}>
       <div className="col-span-12">
         <legend className="page__title--base">Journey type</legend>
       </div>
@@ -13,6 +30,7 @@ export default function Search({ handleSubmit, handleChange }) {
           type="radio"
           className="form__radio--focus"
           onChange={handleChange}
+          {...register("journey_type")}
           value="oneWay"
         />
         <label htmlFor="one-way" className="form__radio">
@@ -26,6 +44,7 @@ export default function Search({ handleSubmit, handleChange }) {
           type="radio"
           className="form__radio--focus"
           onChange={handleChange}
+          {...register("journey_type")}
           value="return"
         />
         <label htmlFor="return" className="form__radio">
@@ -39,6 +58,7 @@ export default function Search({ handleSubmit, handleChange }) {
           type="radio"
           className="form__radio--focus"
           onChange={handleChange}
+          {...register("journey_type")}
           value="multi-city"
         />
         <label htmlFor="multi-city" className="form__radio">
@@ -54,6 +74,7 @@ export default function Search({ handleSubmit, handleChange }) {
           type="text"
           class="form__input"
           placeholder="Origin"
+          {...register("origin")}
           onChange={handleChange}
         />
       </div>
@@ -67,6 +88,7 @@ export default function Search({ handleSubmit, handleChange }) {
           class="form__input"
           placeholder="Destination"
           onChange={handleChange}
+          {...register("destination")}
         />
       </div>
       <div class="col-span-6">
@@ -78,6 +100,7 @@ export default function Search({ handleSubmit, handleChange }) {
           type="date"
           class="form__input"
           onChange={handleChange}
+          {...register("departure")}
         />
       </div>
       <div class="col-span-6">
@@ -89,13 +112,25 @@ export default function Search({ handleSubmit, handleChange }) {
           type="date"
           class="form__input"
           onChange={handleChange}
+          {...register("return")}
         />
       </div>
-      <div class="col-span-12">
+      <div class="col-span-6">
+        <label for="text" class="block mb-1 form__label">
+          Passengers
+        </label>
+        <PassengersBtn value="adult" {...register("adult")}></PassengersBtn>
+      </div>
+      <div class="col-span-6">
         <label for="text" class="block mb-1 form__label">
           Class
         </label>
-        <select class="form__input" name="class" onChange={handleChange}>
+        <select
+          class="form__input"
+          name="class"
+          onChange={handleChange}
+          {...register("class")}
+        >
           <option selected value="economy">
             Economy
           </option>
@@ -105,24 +140,10 @@ export default function Search({ handleSubmit, handleChange }) {
           <option value="5">Any</option>
         </select>
       </div>
-      <div class="col-span-5">
-        <label for="text" class="block mb-1 form__label">
-          Passengers
-        </label>
-        <span>Adult : </span>
-        <PassengersBtn value="adult" onChange={handleChange}></PassengersBtn>
-      </div>
-      <div class="col-span-5">
-        <label class="block mb-1 form__label">&nbsp;</label>
-        <span>Child : </span>
-        <PassengersBtn value="child"></PassengersBtn>
-      </div>
 
       <div class="col-span-12 form__btn--active">
-        <button type="submit" className="" onClick={handleSubmit}>
-          Find available flights
-        </button>
+        <button type="submit">Find available flights</button>
       </div>
-    </>
+    </form>
   );
 }

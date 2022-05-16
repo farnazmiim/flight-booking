@@ -5,7 +5,6 @@ import App from "./App";
 import "./index.scss";
 import AboutUs from "./pages/AboutUs";
 import { QueryClient, QueryClientProvider } from "react-query";
-import SearchWrapper from "./pages/SearchWrapper";
 import Home from "./pages/Home";
 
 const queryClient = new QueryClient();
@@ -16,7 +15,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<Home />} />
-          <Route path="search" element={<SearchWrapper />} />
           <Route path="about-us" element={<AboutUs />} />
           <Route
             path="*"

@@ -7,6 +7,14 @@ import RadioField from "../components/RadioField";
 import PassengerField from "../components/PassengerField";
 // import { useMutation } from "react-query";
 import axios from "../api/axios";
+import {
+  ClassMsg,
+  DepartureDateMsg,
+  DescriptionMsg,
+  OriginMsg,
+  PassengerMsg,
+  ReturnDateMsg,
+} from "../utils/constans";
 
 export default function Home() {
   const [isLoading, setLoading] = useState(false);
@@ -104,11 +112,12 @@ export default function Home() {
 
             <div class="col-span-12">
               <InputField
+                placeholder="From"
                 type="text"
                 label="Origin"
                 errors={errors["origin"]}
                 registration={register("origin", {
-                  required: "origin is required.",
+                  required: OriginMsg,
                 })}
                 className="form__input"
               />
@@ -116,11 +125,12 @@ export default function Home() {
 
             <div class="col-span-12">
               <InputField
+                placeholder="To"
                 type="text"
                 label="Destination"
                 errors={errors["destination"]}
                 registration={register("destination", {
-                  required: "destination is required.",
+                  required: DescriptionMsg,
                 })}
                 className="form__input"
               />
@@ -130,9 +140,9 @@ export default function Home() {
               <InputField
                 type="date"
                 label="Departure date"
-                errors={errors["departure-date"]}
+                errors={errors["departure_date"]}
                 registration={register("departure_date", {
-                  required: "departure date is required.",
+                  required: DepartureDateMsg,
                 })}
                 className="form__input"
               />
@@ -142,9 +152,9 @@ export default function Home() {
               <InputField
                 type="date"
                 label="Return date"
-                errors={errors["return-date"]}
+                errors={errors["return_date"]}
                 registration={register("return_date", {
-                  required: "return date is required.",
+                  required: ReturnDateMsg,
                 })}
                 className="form__input"
               />
@@ -155,7 +165,9 @@ export default function Home() {
                 type="input"
                 label="Passengers"
                 errors={errors["passengers"]}
-                registration={register("passengers")}
+                registration={register("passengers", {
+                  required: PassengerMsg,
+                })}
                 className="form__input--passengers"
               />
             </div>
@@ -166,7 +178,7 @@ export default function Home() {
                 label="Class"
                 errors={errors["class"]}
                 registration={register("class", {
-                  required: "class is required.",
+                  required: ClassMsg,
                 })}
                 className="form__input"
                 options={["Premium Economy", "Business", "First", "Any"].map(

@@ -15,6 +15,7 @@ import {
   PassengerMsg,
   ReturnDateMsg,
 } from "../utils/constans";
+import ErrorPage from "../components/ErrorPage";
 
 export default function Home() {
   const [isLoading, setLoading] = useState(false);
@@ -69,7 +70,8 @@ export default function Home() {
 
   return (
     <div>
-      {isError && <div>Something went wrong ...</div>}
+      {isError && <ErrorPage />}
+      {/* {isError && <div>Something went wrong ...</div>} */}
 
       {isLoading ? (
         <div>Loading ...</div>
@@ -191,7 +193,9 @@ export default function Home() {
             </div>
 
             <div class="col-span-12 form__btn--active">
-              <button type="submit">Find available flights</button>
+              <button type="submit" isLoading>
+                Find available flights
+              </button>
             </div>
           </>
         </Form>

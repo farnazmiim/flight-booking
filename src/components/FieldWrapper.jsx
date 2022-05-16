@@ -1,12 +1,11 @@
 import React from "react";
 
 export default function FieldWrapper({ label, className, errors, children }) {
-  console.log(errors, "----");
   return (
     <div>
       <label className={className}>
         {label}
-        <div className="mt-1">{children}ij</div>
+        <div className="mt-1">{children}</div>
       </label>
       {errors && (
         <div

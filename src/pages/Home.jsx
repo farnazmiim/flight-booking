@@ -1,44 +1,179 @@
-import React from "react";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import Form from "../components/Form";
+import SelectField from "../components/SelectField";
 import InputField from "../components/InputField";
+import RadioField from "../components/RadioField";
+import PassengerField from "../components/PassengerField";
+import { useMutation } from "react-query";
+import axios from "../api/axios";
 
 export default function Home() {
+  const [value, setValue] = useState();
+
+  console.log(value, "valuevaluevalue");
+
+  const newData = {
+    data: {
+      slices: [
+        {
+          origin: value?.origin,
+          destination: value?.destination,
+          departure_date: value?.departure_date,
+        },
+        {
+          origin: value?.destination,
+          destination: value?.origin,
+          departure_date: value?.return_date,
+        },
+      ],
+      passengers: [
+        {
+          type: "adult",
+        },
+        {
+          age: value?.passengers,
+        },
+      ],
+      cabin_class: value?.class,
+    },
+  };
+
+  // console.log(newData, "newDatanewData");
+
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = async (value) => {
+    setValue(value);
+    // createSearchFlight();
+    const aa = await axios.createSearchFlight(newData);
+    console.log(aa);
+  };
+
+  const { mutate: createSearchFlight } = useMutation();
+
   return (
     <div>
-      <Form
-        onSubmit={async (values) => {
-          console.log(values);
-          // await login(values);
-          onSuccess();
-        }}
-      >
-        {({ register, formState }) => (
-          <>
-            <InputField
-              type="email"
-              label="Email Address"
-              errors={formState.errors["email"]}
-              registration={register("email", {
-                required: "email is required.",
+      <Form onSubmit={handleSubmit(onSubmit)} className="page__layout--12">
+        <>
+          <div className="col-span-12">
+            <legend className="page__title--base">Journey type</legend>
+          </div>
+
+          <div class="col-span-4">
+            <RadioField
+              id="one-way"
+              type="radio"
+              label="One way"
+              name="journey_type"
+              errors={errors["journey_type"]}
+              registration={register("journey_type", {
+                required: "radio is required.",
               })}
-              className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="form__radio--focus"
+              value="one-way"
             />
-            <InputField
-              type="password"
-              label="Password"
-              errors={formState.errors["password"]}
-              registration={register("password", {
-                required: "password is required.",
+          </div>
+
+          <div class="col-span-4">
+            <RadioField
+              id="return"
+              type="radio"
+              label="Return"
+              name="journey_type"
+              errors={errors["journey_type"]}
+              registration={register("journey_type", {
+                required: "radio is required.",
               })}
-              className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="form__radio--focus"
+              value="return"
             />
-            <div>
-              <button type="submit" className="w-full">
-                Log in
-              </button>
-            </div>
-          </>
-        )}
+          </div>
+
+          <div class="col-span-12">
+            <InputField
+              type="text"
+              label="Origin"
+              errors={errors["origin"]}
+              registration={register("origin", {
+                required: "origin is required.",
+              })}
+              className="form__input"
+            />
+          </div>
+
+          <div class="col-span-12">
+            <InputField
+              type="text"
+              label="Destination"
+              errors={errors["destination"]}
+              registration={register("destination", {
+                required: "destination is required.",
+              })}
+              className="form__input"
+            />
+          </div>
+
+          <div class="col-span-6">
+            <InputField
+              type="date"
+              label="Departure date"
+              errors={errors["departure-date"]}
+              registration={register("departure_date", {
+                required: "departure date is required.",
+              })}
+              className="form__input"
+            />
+          </div>
+
+          <div class="col-span-6">
+            <InputField
+              type="date"
+              label="Return date"
+              errors={errors["return-date"]}
+              registration={register("return_date", {
+                required: "return date is required.",
+              })}
+              className="form__input"
+            />
+          </div>
+
+          <div class="col-span-6">
+            <PassengerField
+              type="input"
+              label="Passengers"
+              errors={errors["passengers"]}
+              registration={register("passengers")}
+              className="form__input--passengers"
+            />
+          </div>
+
+          <div class="col-span-6">
+            <SelectField
+              type="select"
+              label="Class"
+              errors={errors["class"]}
+              registration={register("class", {
+                required: "class is required.",
+              })}
+              className="form__input"
+              options={["Premium Economy", "Business", "First", "Any"].map(
+                (type) => ({
+                  label: type,
+                  value: type,
+                })
+              )}
+            />
+          </div>
+
+          <div class="col-span-12 form__btn--active">
+            <button type="submit">Find available flights</button>
+          </div>
+        </>
       </Form>
     </div>
   );

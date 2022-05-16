@@ -20,7 +20,6 @@ export default function PassengersBtn() {
   };
 
   const selectHandler = () => {
-    console.log(selectBox);
     setSelectBox(!selectBox);
   };
 

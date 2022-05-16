@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "../api/axios";
 import { useMutation } from "react-query";
 import Search from "./Search";
+import Home from "./Home";
 
 export default function SearchWrapper() {
   const [isLoading, setLoading] = useState(false);
@@ -114,10 +115,11 @@ export default function SearchWrapper() {
       {isLoading ? (
         <div>Loading ...</div>
       ) : (
-        <Search
+        <Home
+          value={value}
           handleChange={handleChange}
           createSearchFlight={createSearchFlight}
-        ></Search>
+        ></Home>
       )}
     </div>
   );

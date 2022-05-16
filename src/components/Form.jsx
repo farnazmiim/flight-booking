@@ -6,7 +6,6 @@ export default function Form({ onSubmit, children, className, options, id }) {
     ...options,
   });
 
-  console.log(methods, "methods=====>");
   return (
     <div>
       <form
@@ -14,7 +13,7 @@ export default function Form({ onSubmit, children, className, options, id }) {
         onSubmit={methods.handleSubmit(onSubmit)}
         id={id}
       >
-        {children(methods)}
+        {children}
       </form>
     </div>
   );

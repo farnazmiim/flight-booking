@@ -18,27 +18,14 @@ import {
 
 import ErrorPage from "../components/ErrorPage";
 
-import {
-  createSearchParams,
-  useNavigate,
-} from "react-router-dom";
+import { createSearchParams, useNavigate } from "react-router-dom";
 
 import { useQuery } from "react-query";
+import Offers from "./OffersList";
+import OffersList from "./OffersList";
 
 export default function Home() {
   const navigate = useNavigate();
-
-  const {
-    handleSubmit,
-    register,
-    formState: { errors },
-  } = useForm();
-
-  const onSubmit = (data) => {
-    console.log("onsubmit");
-    const params = createSearchParams(data);
-    navigate(`/?${params}`);
-  };
 
   const urlParams = new URLSearchParams(window.location.search);
   const class_type = urlParams.get("class_type");
@@ -47,6 +34,27 @@ export default function Home() {
   const destination = urlParams.get("destination");
   const passengers = urlParams.get("passengers");
   const return_date = urlParams.get("return_date");
+
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      class_type,
+      departure_date,
+      origin,
+      destination,
+      passengers,
+      return_date,
+    },
+  });
+
+  const onSubmit = (data) => {
+    console.log("onsubmit");
+    const params = createSearchParams(data);
+    navigate(`/?${params}`);
+  };
 
   const fetchFlight = async () => {
     const response = await axios.createSearchFlight({
@@ -74,7 +82,7 @@ export default function Home() {
         cabin_class: class_type,
       },
     });
-    return response.data;
+    return response.data?.data;
   };
 
   const {
@@ -82,7 +90,17 @@ export default function Home() {
     isLoading: isLoadingQuery,
     error,
   } = useQuery(
-    "searchFlight",
+    [
+      "searchFlight",
+      {
+        origin,
+        destination,
+        departure_date,
+        return_date,
+        passengers,
+        class_type,
+      },
+    ],
     fetchFlight,
     {
       enabled: !!(
@@ -111,6 +129,8 @@ export default function Home() {
       {error && <ErrorPage />}
 
       {isLoadingQuery && <div>Loading ...</div>}
+
+      <OffersList offersList={data?.offers}></OffersList>
 
       <Form onSubmit={handleSubmit(onSubmit)} className="page__layout--12">
         <>

@@ -43,6 +43,18 @@ body {
   .footer__layout {
     @apply p-4 bg-slate-900 dark:text-white;
   }
+  .title__sm--base {
+    @apply text-sm text-gray-500;
+  }
+  .title__md--base {
+    @apply text-base font-medium text-gray-900;
+  }
+  .title__lg--base {
+    @apply text-lg font-semibold text-gray-900;
+  }
+  .flex__inline {
+    @apply inline-flex flex-col;
+  }
 }
 
 // #1c1f4c

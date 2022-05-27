@@ -7,7 +7,14 @@ import AboutUs from "./pages/AboutUs";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Home from "./pages/Home";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <QueryClientProvider client={queryClient}>

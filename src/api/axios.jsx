@@ -9,15 +9,15 @@ const apiClient = axios.create({
   },
 });
 export default {
-  getData: (id) =>
-    apiClient({
-      method: "GET",
-      url: `/offers/${id}`,
-    }),
   createSearchFlight: (data) =>
     apiClient({
       method: "post",
       url: "/offer_requests",
       data,
+    }),
+  getDetailsFlight: (id) =>
+    apiClient({
+      method: "GET",
+      url: `/offers/${id}`,
     }),
 };

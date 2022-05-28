@@ -20,9 +20,7 @@ export default function OffersList({ offersList }) {
 
   const priceHandler = (id) => {
     console.log(id, "id");
-    // clickon price set id to url
-    const params = createSearchParams({ id });
-    console.log(params);
+    const params = createSearchParams(id);
 
     navigate(`/offers/${params}`);
   };

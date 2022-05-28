@@ -6,6 +6,8 @@ import "./index.scss";
 import AboutUs from "./pages/AboutUs";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Home from "./pages/Home";
+import OffersCheckout from "./components/OffersCheckout";
+import Offers from "./components/Offers";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -22,6 +24,8 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<Home />} />
+          <Route path="offers" element={<Offers />} />
+          <Route path="offers/:id" element={<OffersCheckout />} />
           <Route path="about-us" element={<AboutUs />} />
           <Route
             path="*"

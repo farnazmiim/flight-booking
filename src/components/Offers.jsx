@@ -83,11 +83,7 @@ export default function Offers() {
     return response.data?.data;
   };
 
-  const {
-    data,
-    isLoading: isLoadingQuery,
-    error,
-  } = useQuery(
+  const { data, isLoading, error } = useQuery(
     [
       "searchFlight",
       {
@@ -126,133 +122,135 @@ export default function Offers() {
     <div>
       {error && <ErrorPage />}
 
-      {isLoadingQuery && <div>Loading ...</div>}
+      {isLoading && <div>Loading ...</div>}
 
-      <OffersList offersList={data?.offers}></OffersList>
+      {data?.offers ? (
+        <OffersList offersList={data?.offers}></OffersList>
+      ) : (
+        <Form onSubmit={handleSubmit(onSubmit)} className="page__layout--12">
+          <>
+            <div className="col-span-12">
+              <legend className="page__title--base">Journey type</legend>
+            </div>
 
-      <Form onSubmit={handleSubmit(onSubmit)} className="page__layout--12">
-        <>
-          <div className="col-span-12">
-            <legend className="page__title--base">Journey type</legend>
-          </div>
+            <div class="col-span-4">
+              <RadioField
+                id="one-way"
+                type="radio"
+                label="One way"
+                name="journey_type"
+                errors={errors["journey_type"]}
+                registration={register("journey_type", {
+                  required: "radio is required.",
+                })}
+                className="form__radio--focus"
+                value="one-way"
+              />
+            </div>
 
-          <div class="col-span-4">
-            <RadioField
-              id="one-way"
-              type="radio"
-              label="One way"
-              name="journey_type"
-              errors={errors["journey_type"]}
-              registration={register("journey_type", {
-                required: "radio is required.",
-              })}
-              className="form__radio--focus"
-              value="one-way"
-            />
-          </div>
+            <div class="col-span-4">
+              <RadioField
+                id="return"
+                type="radio"
+                label="Return"
+                name="journey_type"
+                errors={errors["journey_type"]}
+                registration={register("journey_type", {
+                  required: "radio is required.",
+                })}
+                className="form__radio--focus"
+                value="return"
+              />
+            </div>
 
-          <div class="col-span-4">
-            <RadioField
-              id="return"
-              type="radio"
-              label="Return"
-              name="journey_type"
-              errors={errors["journey_type"]}
-              registration={register("journey_type", {
-                required: "radio is required.",
-              })}
-              className="form__radio--focus"
-              value="return"
-            />
-          </div>
+            <div class="col-span-12">
+              <InputField
+                placeholder="From"
+                type="text"
+                label="Origin"
+                errors={errors["origin"]}
+                registration={register("origin", {
+                  required: OriginMsg,
+                })}
+                className="form__input"
+              />
+            </div>
 
-          <div class="col-span-12">
-            <InputField
-              placeholder="From"
-              type="text"
-              label="Origin"
-              errors={errors["origin"]}
-              registration={register("origin", {
-                required: OriginMsg,
-              })}
-              className="form__input"
-            />
-          </div>
+            <div class="col-span-12">
+              <InputField
+                placeholder="To"
+                type="text"
+                label="Destination"
+                errors={errors["destination"]}
+                registration={register("destination", {
+                  required: DescriptionMsg,
+                })}
+                className="form__input"
+              />
+            </div>
 
-          <div class="col-span-12">
-            <InputField
-              placeholder="To"
-              type="text"
-              label="Destination"
-              errors={errors["destination"]}
-              registration={register("destination", {
-                required: DescriptionMsg,
-              })}
-              className="form__input"
-            />
-          </div>
+            <div class="col-span-6">
+              <InputField
+                type="date"
+                label="Departure date"
+                errors={errors["departure_date"]}
+                registration={register("departure_date", {
+                  required: DepartureDateMsg,
+                })}
+                className="form__input"
+              />
+            </div>
 
-          <div class="col-span-6">
-            <InputField
-              type="date"
-              label="Departure date"
-              errors={errors["departure_date"]}
-              registration={register("departure_date", {
-                required: DepartureDateMsg,
-              })}
-              className="form__input"
-            />
-          </div>
+            <div class="col-span-6">
+              <InputField
+                type="date"
+                label="Return date"
+                errors={errors["return_date"]}
+                registration={register("return_date", {
+                  required: ReturnDateMsg,
+                })}
+                className="form__input"
+              />
+            </div>
 
-          <div class="col-span-6">
-            <InputField
-              type="date"
-              label="Return date"
-              errors={errors["return_date"]}
-              registration={register("return_date", {
-                required: ReturnDateMsg,
-              })}
-              className="form__input"
-            />
-          </div>
+            <div class="col-span-6">
+              <PassengerField
+                type="input"
+                label="Passengers"
+                errors={errors["passengers"]}
+                registration={register("passengers", {
+                  required: PassengerMsg,
+                })}
+                className="form__input--passengers"
+              />
+            </div>
 
-          <div class="col-span-6">
-            <PassengerField
-              type="input"
-              label="Passengers"
-              errors={errors["passengers"]}
-              registration={register("passengers", {
-                required: PassengerMsg,
-              })}
-              className="form__input--passengers"
-            />
-          </div>
+            <div class="col-span-6">
+              <SelectField
+                type="select"
+                label="Class"
+                errors={errors["class_type"]}
+                registration={register("class_type", {
+                  required: ClassMsg,
+                })}
+                className="form__input"
+                options={["Premium Economy", "Business", "First", "Any"].map(
+                  (type) => ({
+                    label: type,
+                    value: type,
+                  })
+                )}
+              />
+            </div>
 
-          <div class="col-span-6">
-            <SelectField
-              type="select"
-              label="Class"
-              errors={errors["class_type"]}
-              registration={register("class_type", {
-                required: ClassMsg,
-              })}
-              className="form__input"
-              options={["Premium Economy", "Business", "First", "Any"].map(
-                (type) => ({
-                  label: type,
-                  value: type,
-                })
-              )}
-            />
-          </div>
-
-          <div class="col-span-12 form__btn--active">
-            <button type="submit" isLoading>
-              Find available flights
-            </button>
-          </div>
-        </>
-      </Form>
+            <div class="col-span-12 form__btn--active">
+              <button type="submit" isLoading>
+                Find available flights
+              </button>
+            </div>
+          </>
+        </Form>
+      )}
     </div>
   );
 }

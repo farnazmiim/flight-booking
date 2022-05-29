@@ -16,12 +16,12 @@ import {
   ReturnDateMsg,
 } from "../../utils/constans";
 
-import ErrorPage from "../ErrorPage";
+import ErrorPage from "../notification/ErrorPage";
 
 import { createSearchParams, useNavigate } from "react-router-dom";
 
 import { useQuery } from "react-query";
-import OffersList from "./OffersList";
+import OffersList from "../offers/OffersList";
 
 export default function Offers() {
   const navigate = useNavigate();

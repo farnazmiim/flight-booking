@@ -17,25 +17,12 @@ const queryClient = new QueryClient({
   },
 });
 
+console.log("main");
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <QueryClientProvider client={queryClient}>
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route index element={<Home />} />
-          <Route path="offers" element={<Offers />} />
-          <Route path="offers/:id" element={<OffersCheckout />} />
-          <Route path="about-us" element={<AboutUs />} />
-          <Route
-            path="*"
-            element={
-              <main className="p-4">
-                <p>There's nothing here: 404!</p>
-              </main>
-            }
-          />
-        </Route>
-      </Routes>
+      <App />
     </BrowserRouter>
   </QueryClientProvider>
 );

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import FieldWrapper from "./FieldWrapper";
+import FieldWrapper from "../form/FieldWrapper";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronRight,

@@ -1,4 +1,4 @@
-import FieldWrapper from "./FieldWrapper";
+import FieldWrapper from "../form/FieldWrapper";
 
 export default function InputField({
   type = "text",

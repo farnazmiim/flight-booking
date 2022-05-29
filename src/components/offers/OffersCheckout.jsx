@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import axios from "../../api/axios";
-import ErrorPage from "../ErrorPage";
+import ErrorPage from "../notification/ErrorPage";
 import OffersHeader from "./OffersHeader";
 import OffersList from "./OffersList";
 

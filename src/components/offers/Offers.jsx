@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import Form from "../components/Form";
-import SelectField from "../components/SelectField";
-import InputField from "../components/InputField";
-import RadioField from "../components/RadioField";
-import PassengerField from "../components/PassengerField";
+import Form from "../form/Form";
+import SelectField from "../form/SelectField";
+import InputField from "../form/InputField";
+import RadioField from "../form/RadioField";
+import PassengerField from "../form/PassengerField";
 
-import axios from "../api/axios";
+import axios from "../../api/axios";
 import {
   ClassMsg,
   DepartureDateMsg,
@@ -14,14 +14,14 @@ import {
   OriginMsg,
   PassengerMsg,
   ReturnDateMsg,
-} from "../utils/constans";
+} from "../../utils/constans";
 
-import ErrorPage from "../components/ErrorPage";
+import ErrorPage from "../ErrorPage";
 
 import { createSearchParams, useNavigate } from "react-router-dom";
 
 import { useQuery } from "react-query";
-import OffersList from "../components/OffersList";
+import OffersList from "./OffersList";
 
 export default function Offers() {
   const navigate = useNavigate();

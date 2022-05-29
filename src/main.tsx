@@ -1,13 +1,12 @@
-import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.scss";
-import AboutUs from "./pages/AboutUs";
+import AboutUs from "./components/AboutUs";
 import { QueryClient, QueryClientProvider } from "react-query";
-import Home from "./pages/Home";
-import OffersCheckout from "./components/OffersCheckout";
-import Offers from "./components/Offers";
+import Home from "./components/Home";
+import Offers from "./components/offers/Offers";
+import OffersCheckout from "./components/offers/OffersCheckout";
 
 const queryClient = new QueryClient({
   defaultOptions: {

@@ -22,7 +22,7 @@ export default function OffersList({ offersList }) {
     console.log(id, "id");
     const params = createSearchParams(id);
 
-    navigate(`/offers/${params}`);
+    navigate(`/offers/checkout/${params}`);
   };
 
   return (

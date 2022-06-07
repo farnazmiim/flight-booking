@@ -1,5 +1,5 @@
 import Home from "../components/Home";
-import Landing from "../components/Landing";
+import Landing from "../components/offers/Landing";
 import Offers from "../components/offers/Offers";
 import OffersCheckout from "../components/offers/OffersCheckout";
 
@@ -9,8 +9,8 @@ export const protectedRoutes = [
     element: <Home />,
     children: [
       { path: "/", element: <Landing /> },
-      { path: "/offers", element: <Offers /> },
-      { path: "/offers/:id", element: <OffersCheckout /> },
+      { path: ":params", element: <Offers /> },
+      { path: "/offers/checkout/:id", element: <OffersCheckout /> },
       {
         path: "*",
         element: (

@@ -15,6 +15,7 @@ export default {
       url: "/offer_requests",
       data,
     }),
+
   getDetailsFlight: (id) =>
     apiClient({
       method: "GET",

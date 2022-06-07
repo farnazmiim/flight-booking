@@ -1,72 +1,28 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import Form from "../form/Form";
-import SelectField from "../form/SelectField";
-import InputField from "../form/InputField";
-import RadioField from "../form/RadioField";
-import PassengerField from "../form/PassengerField";
-
 import axios from "../../api/axios";
-import {
-  ClassMsg,
-  DepartureDateMsg,
-  DescriptionMsg,
-  OriginMsg,
-  PassengerMsg,
-  ReturnDateMsg,
-} from "../../utils/constans";
 
 import ErrorPage from "../notification/ErrorPage";
 
-import { createSearchParams, useNavigate } from "react-router-dom";
+import queryString from "querystring";
 
 import { useQuery } from "react-query";
 import OffersList from "../offers/OffersList";
 
 export default function Offers() {
-  const navigate = useNavigate();
-
-  const urlParams = new URLSearchParams(window.location.search);
-  const class_type = urlParams.get("class_type");
-  const departure_date = urlParams.get("departure_date");
-  const origin = urlParams.get("origin");
-  const destination = urlParams.get("destination");
-  const passengers = urlParams.get("passengers");
-  const return_date = urlParams.get("return_date");
-
-  const {
-    handleSubmit,
-    register,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      class_type,
-      departure_date,
-      origin,
-      destination,
-      passengers,
-      return_date,
-    },
-  });
-
-  const onSubmit = (data) => {
-    const params = createSearchParams(data);
-    navigate(`/offers?${params}`);
-  };
+  const queryParams = queryString.parse(window.location.search);
 
   const fetchFlight = async () => {
     const response = await axios.createSearchFlight({
       data: {
         slices: [
           {
-            origin: origin,
-            destination: destination,
-            departure_date: departure_date,
+            origin: queryParams.origin,
+            destination: queryParams.destination,
+            departure_date: queryParams.departure_date,
           },
           {
-            origin: destination,
-            destination: origin,
-            departure_date: return_date,
+            origin: queryParams.destination,
+            destination: queryParams.origin,
+            departure_date: queryParams.return_date,
           },
         ],
         passengers: [
@@ -74,10 +30,10 @@ export default function Offers() {
             type: "adult",
           },
           {
-            age: passengers,
+            age: queryParams.passengers,
           },
         ],
-        cabin_class: class_type,
+        cabin_class: queryParams.class_type,
       },
     });
     return response.data?.data;
@@ -87,23 +43,23 @@ export default function Offers() {
     [
       "searchFlight",
       {
-        origin,
-        destination,
-        departure_date,
-        return_date,
-        passengers,
-        class_type,
+        origin: queryParams.origin,
+        destination: queryParams.destination,
+        departure_date: queryParams.departure_date,
+        return_date: queryParams.return_date,
+        passengers: queryParams.passengers,
+        class_type: queryParams.class_type,
       },
     ],
     fetchFlight,
     {
       enabled: !!(
-        class_type &&
-        departure_date &&
-        origin &&
-        destination &&
-        passengers &&
-        return_date
+        queryParams.origin &&
+        queryParams.destination &&
+        queryParams.departure_date &&
+        queryParams.return_date &&
+        queryParams.passengers &&
+        queryParams.class_type
       ),
     },
     {
@@ -124,133 +80,7 @@ export default function Offers() {
 
       {isLoading && <div>Loading ...</div>}
 
-      {data?.offers ? (
-        <OffersList offersList={data?.offers}></OffersList>
-      ) : (
-        <Form onSubmit={handleSubmit(onSubmit)} className="page__layout--12">
-          <>
-            <div className="col-span-12">
-              <legend className="page__title--base">Journey type</legend>
-            </div>
-
-            <div class="col-span-4">
-              <RadioField
-                id="one-way"
-                type="radio"
-                label="One way"
-                name="journey_type"
-                errors={errors["journey_type"]}
-                registration={register("journey_type", {
-                  required: "radio is required.",
-                })}
-                className="form__radio--focus"
-                value="one-way"
-              />
-            </div>
-
-            <div class="col-span-4">
-              <RadioField
-                id="return"
-                type="radio"
-                label="Return"
-                name="journey_type"
-                errors={errors["journey_type"]}
-                registration={register("journey_type", {
-                  required: "radio is required.",
-                })}
-                className="form__radio--focus"
-                value="return"
-              />
-            </div>
-
-            <div class="col-span-12">
-              <InputField
-                placeholder="From"
-                type="text"
-                label="Origin"
-                errors={errors["origin"]}
-                registration={register("origin", {
-                  required: OriginMsg,
-                })}
-                className="form__input"
-              />
-            </div>
-
-            <div class="col-span-12">
-              <InputField
-                placeholder="To"
-                type="text"
-                label="Destination"
-                errors={errors["destination"]}
-                registration={register("destination", {
-                  required: DescriptionMsg,
-                })}
-                className="form__input"
-              />
-            </div>
-
-            <div class="col-span-6">
-              <InputField
-                type="date"
-                label="Departure date"
-                errors={errors["departure_date"]}
-                registration={register("departure_date", {
-                  required: DepartureDateMsg,
-                })}
-                className="form__input"
-              />
-            </div>
-
-            <div class="col-span-6">
-              <InputField
-                type="date"
-                label="Return date"
-                errors={errors["return_date"]}
-                registration={register("return_date", {
-                  required: ReturnDateMsg,
-                })}
-                className="form__input"
-              />
-            </div>
-
-            <div class="col-span-6">
-              <PassengerField
-                type="input"
-                label="Passengers"
-                errors={errors["passengers"]}
-                registration={register("passengers", {
-                  required: PassengerMsg,
-                })}
-                className="form__input--passengers"
-              />
-            </div>
-
-            <div class="col-span-6">
-              <SelectField
-                type="select"
-                label="Class"
-                errors={errors["class_type"]}
-                registration={register("class_type", {
-                  required: ClassMsg,
-                })}
-                className="form__input"
-                options={["Premium Economy", "Business", "First", "Any"].map(
-                  (type) => ({
-                    label: type,
-                    value: type,
-                  })
-                )}
-              />
-            </div>
-
-            <div class="col-span-12 form__btn--active">
-              <button type="submit" isLoading>
-                Find available flights
-              </button>
-            </div>
-          </>
-        </Form>
-      )}
+      {data && <OffersList offersList={data?.offers}></OffersList>}
     </div>
   );
 }

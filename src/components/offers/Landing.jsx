@@ -33,15 +33,15 @@ export default function Landing() {
     register,
     formState: { errors },
   } = useForm({
-    defaultValues: {
-      origin: queryParams.origin,
-      destination: queryParams.destination,
-      departure_date: queryParams.departure_date,
-      return_date: queryParams.return_date,
-      passengers: queryParams.passengers,
-      class_type: queryParams.class_type,
+    // defaultValues: {
+    //   origin: queryParams.origin,
+    //   destination: queryParams.destination,
+    //   departure_date: queryParams.departure_date,
+    //   return_date: queryParams.return_date,
+    //   passengers: queryParams.passengers,
+    //   class_type: queryParams.class_type,
 
-    },
+    // },
   });
 
   return (

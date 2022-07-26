@@ -21,7 +21,7 @@ import ErrorPage from "../ErrorPage";
 import { createSearchParams, useNavigate } from "react-router-dom";
 
 import { useQuery } from "react-query";
-import OffersList from "./OffersList";
+import OffersList from "../OffersList";
 
 export default function Offers() {
   const navigate = useNavigate();

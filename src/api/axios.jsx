@@ -20,4 +20,9 @@ export default {
       method: "GET",
       url: `/offers/${id}`,
     }),
+    createOrderFlight: (data) =>
+    apiClient({
+      method: "post",
+      url: `/orders`,
+    }),
 };

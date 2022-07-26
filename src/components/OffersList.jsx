@@ -7,6 +7,7 @@ import OffersPrice from "./OffersPrice";
 import OffresResult from "./OffresResult";
 
 export default function OffersList({ offersList }) {
+  console.log("offersList");
   const [details, setDetails] = useState(false);
   const navigate = useNavigate();
 
@@ -22,7 +23,7 @@ export default function OffersList({ offersList }) {
     console.log(id, "id");
     const params = createSearchParams(id);
 
-    navigate(`/offers/${params}`);
+    navigate(`/OffersCheckout/${params}`);
   };
 
   return (

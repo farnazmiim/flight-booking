@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import axios from "../api/axios";
 import ErrorPage from "./ErrorPage";
 import OffersHeader from "./OffersHeader";
-import OffersList from "./OffersList";
+import SelectedFlight from "./SelectedFlight";
 
 export default function OffersCheckout() {
   let params = useParams();
@@ -48,7 +48,9 @@ export default function OffersCheckout() {
         <h2 class="title__lg--base mb-3 basis-full">
           <OffersHeader />
         </h2>
-        <h3>base_amount :{data?.base_amount}</h3>
+        <h3>Selected flights</h3>
+        <SelectedFlight selectedFlight={data}/>
+       
       </div>
     </h1>
   );
